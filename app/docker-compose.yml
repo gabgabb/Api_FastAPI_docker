@@ -1,0 +1,23 @@
+version: '3.8'dethy arnaud
+
+services:
+  web:
+    build: .
+    command: uvicorn server.app:FestivalUserAPI --host 0.0.0.0
+    ports:
+      - '80:8000'
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/festival
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14.3
+    expose:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=festival
