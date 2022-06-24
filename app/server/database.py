@@ -1,4 +1,5 @@
-from sqlmodel import SQLModel, create_engine, Session
+from sqlalchemy.orm import Session, sessionmaker
+from sqlmodel import SQLModel, create_engine
 import os
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
@@ -10,6 +11,15 @@ async def init_db():
     SQLModel.metadata.create_all(engine)
 
 
-def get_session():
-    with Session(engine) as session:
-        yield session
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
+def get_db():
+    db: Session = SessionLocal()
+    try:
+        yield db
+        db.commit()
+    except Exception:
+        db.rollback()
+    finally:
+        db.close()
