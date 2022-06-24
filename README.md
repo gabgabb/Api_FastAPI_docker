@@ -14,6 +14,7 @@ Pre-requisites :
 - Python
 
 Run `pip install -r requirements.txt` to install all dependencies.
+
 Run `docker-compose up -d --build` in the app directory.
 
 It binds the application server to `localhost:80` and redirect to the docs.
