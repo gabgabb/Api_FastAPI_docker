@@ -1,11 +1,19 @@
-# API avec FastApi et docker
+# API with FastApi and docker
+
+## Entities
+To customize the API follow these steps :
+ - Change entities in models.py and schemas.py with your own entities
+ - Change operations in cruds.py
+ - Change routes in app.py
 
 ## Installation
 
-Pre-requisites:
+Pre-requisites :
 
 - Docker
+- Python
 
+Run `pip install -r requirements.txt` to install all dependencies.
 Run `docker-compose up -d --build` in the app directory.
 
 It binds the application server to `localhost:80` and redirect to the docs.
